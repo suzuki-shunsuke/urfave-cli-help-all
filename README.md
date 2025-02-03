@@ -1,10 +1,13 @@
 # urfave-cli-help-all
 
-Go library to show the help of all commands of CLIs built with urfave/cli/v2
+[![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/suzuki-shunsuke/urfave-cli-help-all/main/LICENSE) [![Go Reference](https://pkg.go.dev/badge/github.com/suzuki-shunsuke/urfave-cli-help-all.svg)](https://pkg.go.dev/github.com/suzuki-shunsuke/urfave-cli-help-all/helpall)
+
+A Go library to show the help of all commands of CLIs built with [urfave/cli/v2](https://pkg.go.dev/github.com/urfave/cli/v2).
+This is useful if you want to put the usage of CLI built with urfave/cli/v2 into the document.
 
 ## How To Use
 
-e.g. https://github.com/suzuki-shunsuke/tfcmt/blob/9120e07afae826dab4dc28bebd0ce1304350cc5d/pkg/cli/app.go#L117
+Using this library, you can add a command `help-all` showing the help of all commands.
 
 ```go
 import (
@@ -18,6 +21,13 @@ app.Commands = []*cli.Command{
 	helpall.New(nil),
 }
 ```
+
+This example adds the command to [tfcmt](https://github.com/suzuki-shunsuke/tfcmt):
+
+e.g. https://github.com/suzuki-shunsuke/tfcmt/blob/9120e07afae826dab4dc28bebd0ce1304350cc5d/pkg/cli/app.go#L117
+
+`help-all` command outputs the help message.
+You can put it into the document.
 
 ```console
 $ tfcmt help-all

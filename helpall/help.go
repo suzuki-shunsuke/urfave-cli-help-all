@@ -9,7 +9,7 @@ import (
 type Options struct{}
 
 // New returns a new command to show the help of all commands.
-func New(_ *Options) *cli.Command { //nolint:cyclop
+func New(_ *Options) *cli.Command {
 	return &cli.Command{
 		Name:   "help-all",
 		Hidden: true,

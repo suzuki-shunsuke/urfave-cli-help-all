@@ -15,8 +15,8 @@ import (
 app := cli.NewApp()
 app.Commands = []*cli.Command{
 	// ...
+	helpall.New(nil),
 }
-app.Commands = append(app.Commands, helpall.New(nil))
 ```
 
 ```console

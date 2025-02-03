@@ -6,12 +6,27 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func New(app *cli.App) *cli.Command {
+type Options struct {
+	// Header is a function to return the header of the help.
+	Header func(app *cli.App) (string, error)
+	// Footer is a function to return the footer of the help.
+	Footer func(app *cli.App) (string, error)
+}
+
+// New returns a new command to show the help of all commands.
+func New(app *cli.App, opts *Options) *cli.Command {
 	return &cli.Command{
 		Name:   "help-all",
 		Hidden: true,
 		Usage:  "show all help",
 		Action: func(ctx *cli.Context) error {
+			if opts != nil && opts.Header != nil {
+				header, err := opts.Header(app)
+				if err != nil {
+					return err
+				}
+				fmt.Fprintln(app.Writer, header)
+			}
 			fmt.Fprintln(app.Writer, "```console")
 			fmt.Fprintf(app.Writer, "$ %s --help\n", app.Name)
 			if err := cli.ShowAppHelp(ctx); err != nil {
@@ -38,6 +53,13 @@ func New(app *cli.App) *cli.Command {
 					return err
 				}
 				fmt.Fprintln(app.Writer, "```")
+			}
+			if opts != nil && opts.Footer != nil {
+				footer, err := opts.Footer(app)
+				if err != nil {
+					return err
+				}
+				fmt.Fprintln(app.Writer, footer)
 			}
 			return nil
 		},

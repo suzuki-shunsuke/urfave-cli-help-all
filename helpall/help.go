@@ -14,7 +14,7 @@ type Options struct {
 }
 
 // New returns a new command to show the help of all commands.
-func New(app *cli.App, opts *Options) *cli.Command {
+func New(app *cli.App, opts *Options) *cli.Command { //nolint:cyclop
 	return &cli.Command{
 		Name:   "help-all",
 		Hidden: true,
@@ -27,17 +27,20 @@ func New(app *cli.App, opts *Options) *cli.Command {
 				}
 				fmt.Fprintln(app.Writer, header)
 			}
+
 			fmt.Fprintln(app.Writer, "```console")
 			fmt.Fprintf(app.Writer, "$ %s --help\n", app.Name)
 			if err := cli.ShowAppHelp(ctx); err != nil {
 				return err
 			}
 			fmt.Fprintln(app.Writer, "```")
+
 			subcommands := ctx.Command.Subcommands
 			ctx.Command.Subcommands = nil
 			defer func() {
 				ctx.Command.Subcommands = subcommands
 			}()
+
 			ignoredCommands := map[string]struct{}{
 				"help":     {},
 				"help-all": {},
@@ -54,6 +57,7 @@ func New(app *cli.App, opts *Options) *cli.Command {
 				}
 				fmt.Fprintln(app.Writer, "```")
 			}
+
 			if opts != nil && opts.Footer != nil {
 				footer, err := opts.Footer(app)
 				if err != nil {

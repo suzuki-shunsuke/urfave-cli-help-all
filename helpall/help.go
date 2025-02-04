@@ -63,8 +63,9 @@ func showCommandHelp(ctx *cli.Context, cmd *cli.Command, parentCommand string, l
 		ctx.Command = a
 	}()
 
+	level2 := level + 1
 	for _, subcmd := range cmd.Subcommands {
-		if err := showCommandHelp(ctx, subcmd, command, level+1); err != nil {
+		if err := showCommandHelp(ctx, subcmd, command, level2); err != nil {
 			return err
 		}
 	}

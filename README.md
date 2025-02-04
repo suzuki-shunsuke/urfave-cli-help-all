@@ -36,3 +36,14 @@ $ tfcmt help-all
 Output: https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/docs/usage.md?plain=1#L9-L94
 
 e.g. https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/scripts/generate-usage.sh
+
+By default, the command is hidden, so it isn't shown in the help message.
+The function `helpall.New()` returns a `*cli.Command`. You can customize the returned value.
+
+e.g. Change the command name
+
+```go
+cmd := helpall.New(nil)
+cmd.Name = "help-markdown" // Change the command name
+app.Commands = append(app.Commands, cmd)
+```

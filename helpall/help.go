@@ -30,8 +30,13 @@ func New(_ *Options) *cli.Command {
 				ctx.Command.Subcommands = subcommands
 			}()
 
+			cmdName := "help-all"
+			if ctx.Command != nil && ctx.Command.Name != "" {
+				cmdName = ctx.Command.Name
+			}
+
 			for _, cmd := range app.Commands {
-				if cmd.Name == "help-all" {
+				if cmd.Name == cmdName {
 					continue
 				}
 				if err := showCommandHelp(ctx, cmd, app.Name, 2); err != nil { //nolint:mnd

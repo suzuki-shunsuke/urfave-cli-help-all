@@ -22,9 +22,7 @@ app.Commands = []*cli.Command{
 }
 ```
 
-This example adds the command to [tfcmt](https://github.com/suzuki-shunsuke/tfcmt):
-
-e.g. https://github.com/suzuki-shunsuke/tfcmt/blob/9120e07afae826dab4dc28bebd0ce1304350cc5d/pkg/cli/app.go#L117
+[Example](https://github.com/suzuki-shunsuke/tfcmt/blob/7b65e0fc57711bcb1a69846674ef59d8189a78bc/pkg/cli/app.go#L116): Add the command `help-all` to [tfcmt](https://github.com/suzuki-shunsuke/tfcmt)
 
 `help-all` command outputs the help message.
 You can put it into the document.
@@ -33,11 +31,13 @@ You can put it into the document.
 $ tfcmt help-all
 ```
 
-Output: https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/docs/usage.md?plain=1#L9-L94
+Example:
 
-e.g. https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/scripts/generate-usage.sh
+- [Script to generate the document](https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/scripts/generate-usage.sh)
+- [Generated document](https://github.com/suzuki-shunsuke/tfcmt-docs/blob/05b02ee32aeb2935dc096e8e4c1eb76f4f830e4b/docs/usage.md?plain=1#L9-L94)
 
-By default, the command is hidden, so it isn't shown in the help message.
+### Customize the command
+
 The function `helpall.New()` returns a `*cli.Command`. You can customize the returned value.
 
 e.g. Change the command name
@@ -45,5 +45,19 @@ e.g. Change the command name
 ```go
 cmd := helpall.New(nil)
 cmd.Name = "help-markdown" // Change the command name
+app.Commands = append(app.Commands, cmd)
+```
+
+By default, the command is hidden, so it isn't shown in the help message.
+
+```cosole
+$ tfcmt help # The command help-all isn't shown
+```
+
+You can show the command by changing the `Hidden` field.
+
+```go
+cmd := helpall.New(nil)
+cmd.Hidden = true // Show the help of help-all
 app.Commands = append(app.Commands, cmd)
 ```

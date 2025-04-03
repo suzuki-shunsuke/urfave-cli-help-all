@@ -1,8 +1,10 @@
 module github.com/suzuki-shunsuke/urfave-cli-help-all
 
-go 1.21.0
+go 1.22
 
-require github.com/urfave/cli/v3 v3.1.1
+toolchain go1.23.8
+
+require github.com/urfave/cli/v2 v2.27.6
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect

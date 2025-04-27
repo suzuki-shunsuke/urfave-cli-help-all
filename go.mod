@@ -1,6 +1,8 @@
 module github.com/suzuki-shunsuke/urfave-cli-help-all
 
-go 1.21.0
+go 1.22
+
+toolchain go1.23.8
 
 require github.com/urfave/cli/v2 v2.27.6
 
